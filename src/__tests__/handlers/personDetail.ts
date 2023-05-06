@@ -248,7 +248,6 @@ const response = {
 
 const personList = [
   rest.get('/api/people', (req, res, ctx) => {
-    console.log('reqqqq', req)
     return res(ctx.json(response), ctx.status(200))
   }),
 ]

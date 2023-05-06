@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
+import { debounce } from 'lodash'
 import { AppDispatch } from '../config/store'
 import { ListFilter } from '../model'
 
@@ -17,9 +18,16 @@ const useFetchPersonList = () => {
     },
     [dispatch]
   )
-
+  const debouncedSearch = debounce((search) => {
+    if (search) {
+      fetchPersonList({ search })
+    } else {
+      fetchPersonList({ page: 1 })
+    }
+  }, 300)
   return {
     fetchPersonList,
+    debouncedSearch,
   }
 }
 

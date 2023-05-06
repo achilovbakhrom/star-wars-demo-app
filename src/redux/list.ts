@@ -30,18 +30,11 @@ type State = {
   openFilterDialog?: boolean
 }
 
-let controller: AbortController | undefined
-
 export const fetchPersons = createAsyncThunk<Response<Person[]>, ListFilter>(
   'person/fetchList',
   async (filter?: ListFilter) => {
-    if (controller) {
-      controller.abort()
-    }
-    controller = new AbortController()
     return (
       await axios.get<Response<Person[]>>(`https://swapi.dev/api/people/`, {
-        signal: controller.signal,
         params: filter,
       })
     ).data

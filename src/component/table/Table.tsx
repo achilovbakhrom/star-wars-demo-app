@@ -71,6 +71,9 @@ function Table<T>({
                   onRowClick?.(item)
                 }}
                 data-testid="table-body-row"
+                style={{
+                  cursor: onRowClick ? 'pointer' : 'none',
+                }}
               >
                 {fields.map((field) => (
                   <TableCell
